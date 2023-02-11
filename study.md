@@ -26,3 +26,17 @@ server.ts 에서 AppDataSource.initialize() 하고 console.log 찍기
 ts-config 변경된 것 돌려놓기
 
 # Entity 생성하기
+
+npm install bcryptjs class-validator class-transformer --save
+npm i @types/bcryptjs --save-dev
+
+#### Base Entity 생성
+
+- @PrimaryGeneratedColumn()
+- @CreateDateColumn()
+- @UpdateDateColumn()
+
+#### tsconfig.json 수정 (설정에 따라 오류 표시됨)
+
+- "strictPropertyInitialization": false /_ Check for class properties that are declared but not set in the constructor. _/,
+- "experimentalDecorators": true, /_ Enable experimental support for TC39 stage 2 draft decorators. _/

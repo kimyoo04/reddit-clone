@@ -1,3 +1,95 @@
+/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css");
+
+html {
+  font-family: "Pretendard", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+/* ------------------------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ------------------------------------------------------------------ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-light_font_1 dark:text-night_font_1;
+}
+
+a,
+p,
+i {
+  @apply text-light_font_1 dark:text-night_font_1;
+}
+
+span {
+  @apply text-light_font_1 dark:text-night_font_1;
+}
+
+html,
+body,
+input,
+textarea {
+  @apply bg-light_bg_1 dark:bg-night_bg_1 text-light_font_1 dark:text-night_font_1;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 0.12rem solid gray;
+}
+
+footer {
+  @apply text-gray-900 bg-light_bg_1 dark:text-night_font_1 dark:bg-night_bg_1;
+}
+
+/* ------------------------------------------------------------------ */
+
+.col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.col-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.col-end {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.row-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-start {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.row-end {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}

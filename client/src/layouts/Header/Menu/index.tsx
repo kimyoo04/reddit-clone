@@ -13,12 +13,12 @@ const Menu = ({
   return (
     <Overlay setIsClicked={setIsClicked}>
       <div className="z-40 gap-10 col-center">
-        <nav className="w-48 gap-4 col-start sm:mt-auto ">
+        <nav className="w-48 gap-4 col-center sm:mt-auto ">
           <LayoutGroup>
-            <NavLink linkpath={"home"} name={"Home"} />
+            <NavLink linkpath={""} name={"Home"} />
             <NavLink linkpath={"about"} name={"About"} />
-            <NavLink linkpath={"exhibition"} name={"Exhibition"} />
             <NavLink linkpath={"contactus"} name={"Contact Us"} />
+            <NavLink linkpath={"signin"} name={"Sign In"} />
           </LayoutGroup>
         </nav>
 

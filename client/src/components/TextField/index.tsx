@@ -1,9 +1,10 @@
-import {RefCallback} from "react";
+import { RefCallback } from "react";
 import ErrorMsg from "./ErrorMsg";
 
 interface TextFieldProps {
   id: string;
   label: string;
+  placeholder?: string;
   error?: string;
   inputProps?: {
     onChange?: (ev: any) => unknown;
@@ -18,7 +19,7 @@ interface TextFieldProps {
     required?: boolean;
     disabled?: boolean;
   };
-  type?: "password" | "text" | "phone-number";
+  type?: "password" | "text" | "tel";
 }
 
 export const TextField = (props: TextFieldProps) => {
@@ -28,11 +29,12 @@ export const TextField = (props: TextFieldProps) => {
         <span className="">{props.label}:</span>
       </label>
       <input
-        color={"ghost"}
         id={props.id}
+        name={props.label}
         type={props.type ?? "text"}
         {...(props.inputProps ?? {})}
         className="border-b w-72"
+        placeholder={props.placeholder ?? ""}
       />
       {props.error ? <ErrorMsg>{props.error}</ErrorMsg> : null}
     </div>

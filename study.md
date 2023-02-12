@@ -76,6 +76,7 @@ module.exports = {
 ```
 
 - 파싱 에러 처리 위한 .babelrc 와 .eslintrc.json 설정
+- 참고: https://velog.io/@nemo/nextjs-parsing-error
 
 ```json
 // .babelrc

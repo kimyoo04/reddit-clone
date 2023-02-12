@@ -1,8 +1,8 @@
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <main className="">
-        <div className=" text-red-500">study</div>
+        <div className="">HomePage</div>
       </main>
     </>
   );

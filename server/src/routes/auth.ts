@@ -1,5 +1,10 @@
-import { validate } from "class-validator";
 import { Request, Response, Router } from "express";
+import { isEmpty, validate } from "class-validator";
+
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import cookie from "cookie";
+
 import { User } from "../entities/User";
 
 const mapError = (errors: Object[]) => {
@@ -47,7 +52,47 @@ const signup = async (req: Request, res: Response) => {
   }
 };
 
+const signin = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+  try {
+    let errors: any = {};
+
+    // 비워져있다면 에러를 프론트엔드로 보내기
+    if (isEmpty(username)) errors.username = "사용자 이름을 입력해주세요.";
+    if (isEmpty(password)) errors.password = "비밀번호를 입력해주세요.";
+    if (Object.keys(errors).length > 0) return res.status(400).json(errors);
+
+    // 디비에서 유저 찾기
+    const user = await User.findOneBy({ username });
+    if (!user) return res.status(404).json({ username: "없는 사용자입니다." });
+
+    // 유저가 있다면 비밀번호 비교
+    const passwordMatches = await bcrypt.compare(password, user.password);
+    if (!passwordMatches)
+      return res.status(401).json({ password: "비밀번호를 확인해주세요." });
+
+    // 비밀번호가 맞다면 토큰 생성
+    const token = jwt.sign({ username }, process.env.JWT_SECRET!);
+
+    // 쿠키 저장
+    res.set(
+      "Set-Cookie",
+      cookie.serialize("token", token, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 7,
+        path: "/",
+      })
+    );
+
+    return res.json({ user, token });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+};
+
 const router = Router();
 router.post("/signup", signup);
+router.post("/signin", signin);
 
 export default router;

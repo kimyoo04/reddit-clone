@@ -57,12 +57,6 @@ export default function Signup() {
     }
 
     console.log(response);
-
-    const jsonRespose = await response?.data;
-    if (!jsonRespose) {
-      return;
-    }
-
     router.replace("/signin");
     await new Promise((resolve) => setTimeout(resolve, 500));
   };

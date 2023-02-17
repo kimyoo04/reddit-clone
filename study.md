@@ -41,6 +41,7 @@ npm i @types/bcryptjs --save-dev
 
 > "strictPropertyInitialization": false /_ Check for class properties that are declared but not set in the constructor. _/,
 > "experimentalDecorators": true, /_ Enable experimental support for TC39 stage 2 draft decorators. _/
+> "emitDecoratorMetadata": true /_ Emit design-type metadata for decorated declarations in source files. _/,
 
 #### client tailwindcss 설정
 
@@ -61,6 +62,7 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class", // next-themes 다크모드 설정
   theme: {
     extend: {},
   },

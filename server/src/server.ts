@@ -1,10 +1,12 @@
 import express from "express";
 import morgan from "morgan";
-import { AppDataSource } from "./data-source";
-import authRoutes from "./routes/auth";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import { AppDataSource } from "./data-source";
+
+import authRoutes from "./routes/auth";
+import postsRoutes from "./routes/posts";
 
 const app = express();
 dotenv.config();
@@ -37,6 +39,7 @@ app.use(function (_, res, next) {
 
 app.get("/", (_, res) => res.send("running"));
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postsRoutes);
 
 app.listen(process.env.PORT, async () => {
   console.log(`Server running at ${process.env.APP_URL}:${process.env.PORT}`);

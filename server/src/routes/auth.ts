@@ -1,7 +1,11 @@
 import { Request, Response, Router } from "express";
 import { isEmpty, validate } from "class-validator";
-import bcrypt from "bcryptjs";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
+import userMiddleware from "../middlewares/user";
+import authMiddleware from "../middlewares/auth";
+
 import User from "../entities/User";
 
 const mapError = (errors: Object[]) => {
@@ -9,6 +13,10 @@ const mapError = (errors: Object[]) => {
     prev[err.property] = Object.entries(err.constraints)[0][1];
     return prev;
   }, {});
+};
+
+const me = async (_: Request, res: Response) => {
+  return res.json(res.locals.user);
 };
 
 const signup = async (req: Request, res: Response) => {
@@ -195,5 +203,7 @@ router.post("/logout", logout);
 router.get("/accesstoken", accessToken);
 router.get("/refreshtoken", refreshToken);
 router.get("/signin/success", signinSuccess);
+
+router.get("/me", userMiddleware, authMiddleware, me);
 
 export default router;

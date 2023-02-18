@@ -22,11 +22,7 @@ export default function Signup() {
   const onValid = async (data: ISignUpForm) => {
     if (data.password !== data.passwordCheck) {
       console.error("passwordCheck!");
-      setError(
-        "passwordCheck",
-        { message: "Password are not the same" },
-        { shouldFocus: true }
-      );
+      setError("passwordCheck", { message: "Password are not the same" });
     }
 
     let response;

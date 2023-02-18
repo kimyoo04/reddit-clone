@@ -21,14 +21,10 @@ export default function Signin() {
   const onValid = async (data: ISignInForm) => {
     let response;
     try {
-      response = await axios.post(
-        "http://localhost:4000/api/auth/signin",
-        {
-          email: data.email,
-          password: data.password,
-        },
-        { withCredentials: true }
-      );
+      response = await axios.post("http://localhost:4000/api/auth/signin", {
+        email: data.email,
+        password: data.password,
+      });
     } catch (error: any) {
       const setErrors = (errors: Record<string, string>) => {
         Object.entries(errors).forEach(([key, value]) => {

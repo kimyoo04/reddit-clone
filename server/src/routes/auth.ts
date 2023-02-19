@@ -104,11 +104,15 @@ const signin = async (req: Request, res: Response) => {
       path: "/",
       secure: false,
       httpOnly: true,
+      sameSite: "strict",
+      maxAge: 60 * 60, // 1시간
     });
     res.cookie("refreshToken", refreshToken, {
       path: "/",
       secure: false,
       httpOnly: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 7, // 일주일
     });
 
     return res.status(200).json({ message: "Sign in success." });
@@ -174,6 +178,8 @@ const refreshToken = async (req: Request, res: Response) => {
       path: "/",
       secure: false,
       httpOnly: true,
+      sameSite: "strict",
+      maxAge: 60 * 60, // 1시간
     });
 
     res.status(200).json({ message: "Access token is recreated" });
@@ -199,11 +205,12 @@ const signinSuccess = async (req: Request, res: Response) => {
 const router = Router();
 router.post("/signup", signup);
 router.post("/signin", signin);
-router.post("/logout", logout);
+
 router.get("/accesstoken", accessToken);
 router.get("/refreshtoken", refreshToken);
 router.get("/signin/success", signinSuccess);
 
 router.get("/me", userMiddleware, authMiddleware, me);
+router.get("/logout", userMiddleware, authMiddleware, logout);
 
 export default router;

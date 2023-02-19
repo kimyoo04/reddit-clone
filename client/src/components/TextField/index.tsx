@@ -6,6 +6,7 @@ interface TextFieldProps {
   label: string;
   placeholder?: string;
   error?: string;
+  autoComplete?: string;
   inputProps?: {
     onChange?: (ev: any) => unknown;
     onBlur?: (ev: any) => unknown;
@@ -34,6 +35,7 @@ export const TextField = (props: TextFieldProps) => {
         type={props.type ?? "text"}
         {...(props.inputProps ?? {})}
         className="border-b w-72"
+        autoComplete={props.autoComplete ?? ""}
         placeholder={props.placeholder ?? ""}
       />
       {props.error ? <ErrorMsg>{props.error}</ErrorMsg> : null}

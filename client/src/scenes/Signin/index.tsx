@@ -80,6 +80,7 @@ export default function Signin() {
         label="password"
         type="password"
         error={errors.password?.message as string}
+        autoComplete="current-password"
         inputProps={{
           ...register("password", {
             required: "Password is required",

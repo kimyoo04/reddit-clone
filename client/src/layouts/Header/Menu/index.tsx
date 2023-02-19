@@ -18,7 +18,6 @@ const Menu = ({
             <NavLink linkpath={""} name={"Home"} />
             <NavLink linkpath={"about"} name={"About"} />
             <NavLink linkpath={"contactus"} name={"Contact Us"} />
-            <NavLink linkpath={"signin"} name={"Sign In"} />
           </LayoutGroup>
         </nav>
 

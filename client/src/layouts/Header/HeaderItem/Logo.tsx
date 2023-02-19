@@ -3,9 +3,7 @@ import Link from "next/link";
 export default function Logo() {
   return (
     <Link href={"/"}>
-      <div className="relative w-[72px]">
-        <div className="z-30 block">Logo</div>
-      </div>
+      <span className="text-xl font-bold">Logo</span>
     </Link>
   );
 }

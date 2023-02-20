@@ -11,7 +11,9 @@ export default function NavLink({
 
   return (
     <Link href={link}>
-      <span className="transition-all duration-500">{name}</span>
+      <span className="transition-all duration-100 hover:text-main_color">
+        {name}
+      </span>
     </Link>
   );
 }

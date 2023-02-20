@@ -13,7 +13,7 @@ export default function MenuToggle() {
 
       <i
         onClick={() => setIsClicked(true)}
-        className="text-2xl cursor-pointer ri-menu-3-line"
+        className="text-2xl cursor-pointer ri-menu-3-line hover:text-main_color"
       />
     </>
   );

@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import { Provider } from "react-redux";
 import { store } from "@toolkit/store";
 import Axios from "axios";
+import CookiesProvider from "react-cookie/cjs/CookiesProvider";
+import { NextPageContext } from "next";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -29,12 +31,23 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider attribute="class">
         <Provider store={store}>
           <main>
-            <AnimatePresence mode="wait">
-              <Component {...pageProps} key={router.route} />
-            </AnimatePresence>
+            <CookiesProvider>
+              <AnimatePresence mode="wait">
+                <Component {...pageProps} key={router.route} />
+              </AnimatePresence>
+            </CookiesProvider>
           </main>
         </Provider>
       </ThemeProvider>
     </>
   );
 }
+
+// App.getInitialProps = async (context: NextPageContext) => {
+//   const { req } = context;
+//   let pageProps = {};
+//   pageProps = { refreshToken: req?.headers.refreshToken };
+
+//   // return한 값은 해당 컴포넌트의 props로 들어가게 됩니다.
+//   return { pageProps };
+// };

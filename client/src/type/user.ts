@@ -5,6 +5,7 @@ export type userPayload = {
 };
 
 export interface AuthState {
+  loading: boolean;
   isAuthenticated: boolean;
   user: userPayload;
 }

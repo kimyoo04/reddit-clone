@@ -5,9 +5,14 @@ import ErrorMsg from "@components/TextField/ErrorMsg";
 import { TextField } from "@components/TextField";
 import Link from "next/link";
 import axios from "axios";
+import { useAppDispatch } from "@toolkit/hook";
+import { authActions } from "@features/auth/authSlice";
+import { Cookies } from "react-cookie";
 
 export default function Signin() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const cookies = new Cookies();
 
   const {
     register,
@@ -19,12 +24,17 @@ export default function Signin() {
   });
 
   const onValid = async (data: ISignInForm) => {
-    let response;
     try {
-      response = await axios.post("http://localhost:4000/api/auth/signin", {
+      // get user
+      const response = await axios.post("/auth/signin", {
         email: data.email,
         password: data.password,
       });
+
+      // auth state
+      dispatch(authActions.signin({ ...response.data }));
+
+      console.log(response);
     } catch (error: any) {
       const setErrors = (errors: Record<string, string>) => {
         Object.entries(errors).forEach(([key, value]) => {
@@ -40,7 +50,6 @@ export default function Signin() {
       return;
     }
 
-    console.log(response);
     router.replace("/");
     await new Promise((resolve) => setTimeout(resolve, 500));
   };

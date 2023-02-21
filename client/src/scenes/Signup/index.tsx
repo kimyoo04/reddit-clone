@@ -25,18 +25,14 @@ export default function Signup() {
       setError("passwordCheck", { message: "Password are not the same" });
     }
 
-    let response;
     try {
-      response = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/auth/signup`,
-        {
-          username: data.username,
-          phone: data.phone,
-          email: data.email,
-          password: data.password,
-        },
-        { withCredentials: true }
-      );
+      const response = await axios.post(`/auth/signup`, {
+        username: data.username,
+        phone: data.phone,
+        email: data.email,
+        password: data.password,
+      });
+      console.log(response);
     } catch (error: any) {
       const setErrors = (errors: Record<string, string>) => {
         Object.entries(errors).forEach(([key, value]) => {
@@ -52,7 +48,6 @@ export default function Signup() {
       return;
     }
 
-    console.log(response);
     router.replace("/signin");
     await new Promise((resolve) => setTimeout(resolve, 500));
   };

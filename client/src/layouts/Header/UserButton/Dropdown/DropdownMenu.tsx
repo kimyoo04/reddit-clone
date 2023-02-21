@@ -1,10 +1,11 @@
+import { authActions } from "@features/auth/authSlice";
+import { useAppDispatch } from "@toolkit/hook";
 import { fadeDownIn } from "@util/variants/dropdown";
 import { motion } from "framer-motion";
 import DropdownItem from "./DropdownItem";
 
 export default function DropdownMenu() {
-  const logout = () => {};
-
+  const dispatch = useAppDispatch();
   return (
     <motion.ul
       variants={fadeDownIn}
@@ -19,7 +20,10 @@ export default function DropdownMenu() {
 
       {/* 로그아웃 */}
       <div className="block px-4 py-2 transition-all duration-200 hover:bg-light_gray_4 dark:hover:bg-night_gray_4">
-        <button className="text-red-500" onClick={() => logout()}>
+        <button
+          className="text-red-500"
+          onClick={() => dispatch(authActions.logout())}
+        >
           Sign out
         </button>
       </div>

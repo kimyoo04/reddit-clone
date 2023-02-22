@@ -25,8 +25,9 @@ export default function Header() {
         dispatch(authActions.stopLoading());
       }
     };
+
     getAuth();
-  }, [dispatch]);
+  }, []);
 
   return (
     <header className="text-gray-600 h-[68px] body-font">

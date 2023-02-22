@@ -1,6 +1,7 @@
 import { authActions } from "@features/auth/authSlice";
 import { useAppDispatch } from "@toolkit/hook";
 import { fadeDownIn } from "@util/variants/dropdown";
+import axios from "axios";
 import { motion } from "framer-motion";
 import DropdownItem from "./DropdownItem";
 
@@ -22,7 +23,11 @@ export default function DropdownMenu() {
       <div className="block px-4 py-2 transition-all duration-200 hover:bg-light_gray_4 dark:hover:bg-night_gray_4">
         <button
           className="text-red-500"
-          onClick={() => dispatch(authActions.logout())}
+          onClick={async () => {
+            const response = await axios.get("/auth/logout");
+            console.log(response.data);
+            dispatch(authActions.logout());
+          }}
         >
           Sign out
         </button>

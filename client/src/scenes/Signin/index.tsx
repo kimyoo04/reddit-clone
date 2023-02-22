@@ -7,12 +7,10 @@ import Link from "next/link";
 import axios from "axios";
 import { useAppDispatch } from "@toolkit/hook";
 import { authActions } from "@features/auth/authSlice";
-import { Cookies } from "react-cookie";
 
 export default function Signin() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const cookies = new Cookies();
 
   const {
     register,

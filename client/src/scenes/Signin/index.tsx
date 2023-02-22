@@ -5,9 +5,12 @@ import ErrorMsg from "@components/TextField/ErrorMsg";
 import { TextField } from "@components/TextField";
 import Link from "next/link";
 import axios from "axios";
+import { useAppDispatch } from "@toolkit/hook";
+import { authActions } from "@features/auth/authSlice";
 
 export default function Signin() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -19,16 +22,17 @@ export default function Signin() {
   });
 
   const onValid = async (data: ISignInForm) => {
-    let response;
     try {
-      response = await axios.post(
-        "http://localhost:4000/api/auth/signin",
-        {
-          email: data.email,
-          password: data.password,
-        },
-        { withCredentials: true }
-      );
+      // get user
+      const response = await axios.post("/auth/signin", {
+        email: data.email,
+        password: data.password,
+      });
+
+      // auth state
+      dispatch(authActions.signin({ ...response.data }));
+
+      console.log(response);
     } catch (error: any) {
       const setErrors = (errors: Record<string, string>) => {
         Object.entries(errors).forEach(([key, value]) => {
@@ -44,7 +48,6 @@ export default function Signin() {
       return;
     }
 
-    console.log(response);
     router.replace("/");
     await new Promise((resolve) => setTimeout(resolve, 500));
   };
@@ -84,6 +87,7 @@ export default function Signin() {
         label="password"
         type="password"
         error={errors.password?.message as string}
+        autoComplete="current-password"
         inputProps={{
           ...register("password", {
             required: "Password is required",

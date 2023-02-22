@@ -14,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL + "/api";
+  Axios.defaults.withCredentials = true;
 
   return (
     <>
@@ -37,3 +38,12 @@ export default function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+// App.getInitialProps = async (context: NextPageContext) => {
+//   const { req } = context;
+//   let pageProps = {};
+//   pageProps = { refreshToken: req?.headers.refreshToken };
+
+//   // return한 값은 해당 컴포넌트의 props로 들어가게 됩니다.
+//   return { pageProps };
+// };
